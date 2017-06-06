@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='arrow-back'></ion-icon>
+    </button>
+    <ion-title>Detailansicht</ion-title>
+
+    <ion-buttons start>
+        <button ion-button icon-only>
+          <ion-icon name="brush"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-buttons right>
+        <button ion-button icon-only>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab style="margin:16pt" right bottom>
+    <button ion-fab color="positive"><ion-icon name="share"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab onclick="window.plugins.socialsharing.shareViaFacebook('Message via Facebook', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">
+        <ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab onclick="window.plugins.socialsharing.shareViaTwitter('Message and link via Twitter', null /* img */, 'http://www.x-services.nl')">
+        <ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">
+        <ion-icon name="logo-whatsapp"></ion-icon></button>
+      <button ion-fab>
+        <ion-icon name="mail"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+  
+</ion-content>
+
