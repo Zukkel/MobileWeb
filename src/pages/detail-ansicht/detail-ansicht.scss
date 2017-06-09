@@ -1,3 +1,14 @@
 page-detail-ansicht {
 
+    .full-screen-image {
+        display:      block;
+        height:       auto;
+        margin:       0 auto;
+        widows:       100%;
+        padding:      0, 16px;
+    }
+
+    #categoryBar {
+        display: none;
+    }
 }

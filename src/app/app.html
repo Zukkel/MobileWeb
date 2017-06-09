@@ -1,17 +1,25 @@
 <ion-menu [content]="content">
 
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Ordner</ion-title>
-    </ion-toolbar>
+    <ion-navbar color="primary">
+      <ion-title>Kategorien</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only (click)="createFolder()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+      <button ion-item detail-push>Urlaub</button>
+      <button ion-item detail-push>Zuhause</button>
+      <button ion-item detail-push>Technik</button>
+      <button ion-item detail-push>Natur</button>
+      <button ion-item detail-push>Lustig</button>
     </ion-list>
+
   </ion-content>
 
 </ion-menu>

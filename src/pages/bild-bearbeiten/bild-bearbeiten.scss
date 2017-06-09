@@ -1,3 +1,47 @@
 page-bild-bearbeiten {
 
+    .full-screen-image {
+        display:      block;
+        height:       auto;
+        margin:       0 auto;
+        widows:       100%;
+    }
+
+    .button-group {
+
+        background-color: rgba(0, 0, 0, .75);
+
+        position: fixed;
+        bottom:   0;
+        padding:  0;
+        widows:   100%;
+
+        .col {
+
+            &:first-child:not(:last-child) {
+            padding-right: 0;
+                .button {
+                    color: white;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+            }
+            &:not(:first-child):not(:last-child) {
+            padding-right: 0;
+            padding-left: 0;
+                .button {
+                    color: white;
+                    border-radius: 0;
+                }
+            }
+            &:last-child:not(:first-child) {
+            padding-left: 0;
+                .button {
+                    color: white;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
+    }
 }

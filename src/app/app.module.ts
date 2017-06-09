@@ -3,11 +3,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+import { BildUebersichtPage } from '../pages/bild-uebersicht/bild-uebersicht';
 import { DetailAnsichtPage } from './../pages/detail-ansicht/detail-ansicht';
 import { BildBearbeitenPage } from './../pages/bild-bearbeiten/bild-bearbeiten';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,11 +13,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    HelloIonicPage,
+    BildUebersichtPage,
     DetailAnsichtPage,
-    BildBearbeitenPage,
-    ItemDetailsPage,
-    ListPage
+    BildBearbeitenPage
   ],
   imports: [
     BrowserModule,
@@ -28,11 +24,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HelloIonicPage,
+    BildUebersichtPage,
     DetailAnsichtPage,
-    BildBearbeitenPage,
-    ItemDetailsPage,
-    ListPage
+    BildBearbeitenPage
   ],
   providers: [
     StatusBar,

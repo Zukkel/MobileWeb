@@ -1,11 +1,9 @@
 import { DetailAnsichtPage } from './../pages/detail-ansicht/detail-ansicht';
 import { BildBearbeitenPage } from './../pages/bild-bearbeiten/bild-bearbeiten';
+import { BildUebersichtPage } from '../pages/bild-uebersicht/bild-uebersicht';
 
 import { Component, ViewChild } from '@angular/core';
-
 import { Platform, MenuController, Nav } from 'ionic-angular';
-
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,7 +16,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage = HelloIonicPage;
+  rootPage = BildUebersichtPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -31,7 +29,7 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Bildübersicht', component: HelloIonicPage },
+      { title: 'Bildübersicht', component: BildUebersichtPage },
       { title: 'Detailansicht', component: DetailAnsichtPage },
       { title: 'Bild bearbeiten', component: BildBearbeitenPage }
     ];

@@ -6,31 +6,51 @@
     <ion-title>Detailansicht</ion-title>
 
     <ion-buttons start>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="openEditScreen()">
           <ion-icon name="brush"></ion-icon>
         </button>
     </ion-buttons>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="toggleCategoryBar()">
+          <ion-icon name="folder"></ion-icon>
+        </button>
+    </ion-buttons>
     <ion-buttons right>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="deleteImage()">
           <ion-icon name="trash"></ion-icon>
         </button>
     </ion-buttons>
-
   </ion-navbar>
+
+  <ion-item id="categoryBar">
+    <ion-label>Kategorie</ion-label>
+    <ion-select multiple="false" okText="OK" cancelText="Abbrechen">
+      <ion-option>Urlaub</ion-option>
+      <ion-option>Zuhause</ion-option>
+      <ion-option>Technik</ion-option>
+      <ion-option>Natur</ion-option>
+      <ion-option>Lustig</ion-option>
+    </ion-select>
+  </ion-item>
+
 </ion-header>
 
 <ion-content>
 
-  <ion-fab style="margin:16pt" right bottom>
+  <div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg" class="full-screen-image">
+  </div>
+
+  <ion-fab right bottom>
     <button ion-fab color="positive"><ion-icon name="share"></ion-icon></button>
     <ion-fab-list side="left">
-      <button ion-fab onclick="window.plugins.socialsharing.shareViaFacebook('Message via Facebook', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">
+      <button ion-fab (click)="shareToFacebook()">
         <ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab onclick="window.plugins.socialsharing.shareViaTwitter('Message and link via Twitter', null /* img */, 'http://www.x-services.nl')">
+      <button ion-fab (click)="shareToTwitter()">
         <ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">
+      <button ion-fab (click)="shareToWhatsapp()">
         <ion-icon name="logo-whatsapp"></ion-icon></button>
-      <button ion-fab>
+      <button ion-fab (click)="shareWithEmail()">
         <ion-icon name="mail"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>

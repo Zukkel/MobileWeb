@@ -4,15 +4,40 @@
       <ion-icon name='arrow-back'></ion-icon>
     </button>
     <ion-title>Bild bearbeiten</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="save"></ion-icon>
-      </button>
+
+    <ion-buttons right>
+        <button ion-button icon-only (click)="saveImage()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
     </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  
-</ion-content>
 
+  <div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg" class="full-screen-image">
+  </div>
+
+  <ion-grid class="button-group">
+    <ion-row>
+      <ion-col>
+        <button ion-button block icon-only clear (click)="rotateImage()">
+            <ion-icon name="refresh"></ion-icon>
+          </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block icon-only clear (click)="applyFilter()">
+            <ion-icon name="color-filter"></ion-icon>
+          </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block icon-only clear (click)="cutImage()">
+            <ion-icon name="cut"></ion-icon>
+          </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

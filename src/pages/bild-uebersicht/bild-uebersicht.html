@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Shake-A-Gram</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    
+  <ion-grid>
+    <ion-row *ngFor="let row of grid">
+      <ion-col width-50 *ngFor="let file_uri of row">
+        <img [src]="file_uri">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab right bottom>
+    <button  ion-fab color="positive"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon name="cloud-download" (click)="importFromCloud()"></ion-icon></button>
+      <button ion-fab><ion-icon name="document" (click)="openGallery()"></ion-icon></button>
+      <button ion-fab><ion-icon name="camera" (click)="takePicture()"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
