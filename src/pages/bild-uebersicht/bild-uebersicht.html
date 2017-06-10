@@ -12,7 +12,7 @@
   <ion-grid>
     <ion-row *ngFor="let row of grid">
       <ion-col width-50 *ngFor="let file_uri of row">
-        <img [src]="file_uri">
+        <img onerror="this.style.display='none'" [src]="file_uri">
       </ion-col>
     </ion-row>
   </ion-grid>
