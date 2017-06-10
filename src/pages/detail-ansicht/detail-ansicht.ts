@@ -6,18 +6,14 @@ import { Shake } from '@ionic-native/shake';
 
 @Component({
   selector: 'page-detail-ansicht',
-  templateUrl: 'detail-ansicht.html'
+  templateUrl: 'detail-ansicht.html',
+  providers: [[Shake], [SocialSharing]]
 })
 export class DetailAnsichtPage {
 
-  socialSharing: SocialSharing;
-
-  constructor(public navCtrl: NavController) {
-    this.socialSharing = new SocialSharing();
-
+  constructor(public navCtrl: NavController, private shake: Shake, private socialSharing: SocialSharing) {
     // create a listener for shake gestures
-    var shake: Shake = new Shake();
-    shake.startWatch(40).subscribe(() => {
+    this.shake.startWatch(30).subscribe(() => {
       // open a random image from the current selection
     });
   }

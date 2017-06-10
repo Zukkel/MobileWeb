@@ -7,7 +7,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-bild-uebersicht',
-  templateUrl: 'bild-uebersicht.html'
+  templateUrl: 'bild-uebersicht.html',
+  providers: [[Shake], [Camera]]
 })
 
 export class BildUebersichtPage {
@@ -15,10 +16,9 @@ export class BildUebersichtPage {
   images: Array<string>;	
 	grid: Array<Array<string>>;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera) {
     // create a listener for shake gestures
-    var shake: Shake = new Shake();
-    shake.startWatch(40).subscribe(() => {
+    shake.startWatch(30).subscribe(() => {
       // open a random image from the current selection
       this.navCtrl.push(DetailAnsichtPage);
     });
@@ -31,6 +31,7 @@ export class BildUebersichtPage {
       "https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg"
     ];
 
+    // rebuild the grid structure
     this.refreshGrid();
   }
 
@@ -41,14 +42,13 @@ export class BildUebersichtPage {
     const options: CameraOptions = {
       quality: 100,
       allowEdit: true,
-      sourceType: camera.PictureSourceType.CAMERA,
-      destinationType: camera.DestinationType.FILE_URI,
-      encodingType: camera.EncodingType.JPEG,
-      mediaType: camera.MediaType.PICTURE
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
     }
 
-    var camera: Camera = new Camera();
-    camera.getPicture(options).then((imageURI) => {
+    this.camera.getPicture(options).then((imageURI) => {
       // on success
     }, (err) => {
       // on fail
