@@ -2,7 +2,7 @@
 
   <ion-header>
     <ion-navbar color="primary">
-      <ion-title>Kategorien</ion-title>
+      <ion-title>Kategorien-Filter</ion-title>
       <ion-buttons right>
         <button ion-button icon-only (click)="createFolder()">
           <ion-icon name="add"></ion-icon>
@@ -13,11 +13,26 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item detail-push>Urlaub</button>
-      <button ion-item detail-push>Zuhause</button>
-      <button ion-item detail-push>Technik</button>
-      <button ion-item detail-push>Natur</button>
-      <button ion-item detail-push>Lustig</button>
+      <ion-item>
+        <ion-label>Urlaub</ion-label>
+        <ion-toggle [(ngModel)]="urlaub"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Zuhause</ion-label>
+        <ion-toggle [(ngModel)]="zuhause"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Technik</ion-label>
+        <ion-toggle [(ngModel)]="technik"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Natur</ion-label>
+        <ion-toggle [(ngModel)]="natur"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lustig</ion-label>
+        <ion-toggle [(ngModel)]="lustig"></ion-toggle>
+      </ion-item>
     </ion-list>
 
   </ion-content>

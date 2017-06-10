@@ -1,14 +1,15 @@
+import { BedienungsanleitungPage } from './../bedienungsanleitung/bedienungsanleitung';
 import { DetailAnsichtPage } from './../detail-ansicht/detail-ansicht';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { Shake } from '@ionic-native/shake';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-bild-uebersicht',
   templateUrl: 'bild-uebersicht.html',
-  providers: [[Shake], [Camera]]
+  providers: [[Shake], [Camera], [ModalController]]
 })
 
 export class BildUebersichtPage {
@@ -16,7 +17,7 @@ export class BildUebersichtPage {
   images: Array<string>;	
 	grid: Array<Array<string>>;
 
-  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera) {
+  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera, private modalCtrl: ModalController) {
     // create a listener for shake gestures
     shake.startWatch(30).subscribe(() => {
       // open a random image from the current selection
@@ -25,10 +26,10 @@ export class BildUebersichtPage {
 
     // TODO remove later
     this.images = [
-      "https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1c/FuBK_testcard_vectorized.svg"
+      "assets/img/testbild.png",
+      "assets/img/testbild.png",
+      "assets/img/testbild.png",
+      "assets/img/testbild.png"
     ];
 
     // rebuild the grid structure
@@ -81,6 +82,15 @@ export class BildUebersichtPage {
    */
   public importFromCloud(): void {
     // TODO add cloud import code
+  }
+
+  /**
+   * Displays an instruction popup that explains how the app works
+   */
+  public showInstructions(): void {
+    // Open the instructions popup
+    let infoModal = this.modalCtrl.create(BedienungsanleitungPage);
+    infoModal.present();
   }
 
   /**
