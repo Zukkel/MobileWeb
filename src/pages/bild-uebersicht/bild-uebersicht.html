@@ -13,14 +13,11 @@
 </ion-header>
 
 <ion-content>
-    
-  <ion-grid>
-    <ion-row *ngFor="let row of grid">
-      <ion-col width-50 *ngFor="let file_uri of row">
-        <img onerror="this.style.display='none'" [src]="file_uri">
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+  <div class="square-grid" *ngFor="let file_uri of images">
+    <div class="square" [style.background-image]="'url('+file_uri+')'">
+    </div>
+  </div>
 
   <ion-fab right bottom>
     <button  ion-fab color="positive"><ion-icon name="add"></ion-icon></button>

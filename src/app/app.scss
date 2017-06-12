@@ -19,9 +19,13 @@
         margin-right:  8px;
         margin-bottom: 8px;
     }
+
+    scroll-content {
+        overflow-y: auto;
+    }
     
     .bar-button-md {
-        margin-left: 2px !important;
+        margin-left:  2px !important;
         margin-right: 8px !important;
     }
 

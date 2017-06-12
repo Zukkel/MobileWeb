@@ -1,14 +1,14 @@
 page-detail-ansicht {
 
     #categoryBar {
-        margin-top: -46px;
+        margin-top: -46.0px;
         z-index:    -1;
     }
 
     .animate {
-        animation-name:      moveCatergoryBar;
-        animation-duration:  0.5s;
+        animation: moveCatergoryBar ease-out 1;
         animation-fill-mode: forwards;
+        animation-duration:  0.5s;
     }
 
     @keyframes moveCatergoryBar {

@@ -1,3 +1,18 @@
 page-bild-uebersicht {
 
+    .square-grid {
+        margin: 1.16%;
+    }
+
+   .square {
+        background-position: center center;
+        background-repeat:   no-repeat;
+        background-size:     cover;
+        float:               left;
+        position:            relative;
+        width:               31%;
+        padding-bottom :     31%;
+        margin:              1.16%;
+        overflow:            hidden;
+    }
 }

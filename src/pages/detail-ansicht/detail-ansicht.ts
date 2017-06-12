@@ -24,6 +24,7 @@ export class DetailAnsichtPage {
   public openEditScreen(): void {
     this.navCtrl.push(BildBearbeitenPage, null /* pass image file here */);
   }
+
   /**
    * Shows the category bar only if needed
    */
