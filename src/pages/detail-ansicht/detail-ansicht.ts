@@ -28,12 +28,8 @@ export class DetailAnsichtPage {
    * Shows the category bar only if needed
    */
   public toggleCategoryBar(): void {
-    var bar = document.getElementById('categoryBar')
-    if(bar.style.display == 'none') {
-      bar.style.display = 'block';
-    } else {
-      bar.style.display = 'none';
-    }
+    var bar = document.getElementById("categoryBar");
+    bar.classList.toggle("animate");
   }
 
   /**

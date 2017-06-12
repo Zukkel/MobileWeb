@@ -1,13 +1,18 @@
 page-detail-ansicht {
 
-    .full-screen-image {
-        display:      block;
-        height:       auto;
-        margin:       0 auto;
-        widows:       100%;
+    #categoryBar {
+        margin-top: -46px;
+        z-index:    -1;
     }
 
-    #categoryBar {
-        display: none;
+    .animate {
+        animation-name:      moveCatergoryBar;
+        animation-duration:  0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes moveCatergoryBar {
+        0%   { margin-top: -46.0px; }
+        100% { margin-top: -00.0px; }
     }
 }
