@@ -9,14 +9,14 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 @Component({
   selector: 'page-bild-uebersicht',
   templateUrl: 'bild-uebersicht.html',
-  providers: [[Shake], [Camera], [ModalController]]
+  providers: [[Shake], [Camera], [ModalController], [ImagePicker]]
 })
 
 export class BildUebersichtPage {
 
   images: Array<string>;	
 
-  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera, private modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera, private modalCtrl: ModalController, private imagePicker: ImagePicker) {
     // create a listener for shake gestures
     shake.startWatch(30).subscribe(() => {
       // open a random image from the current selection
@@ -37,16 +37,16 @@ export class BildUebersichtPage {
    */
   public takePicture(): void {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 75,
       allowEdit: true,
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      saveToPhotoAlbum: false
     }
 
     this.camera.getPicture(options).then((imageURI) => {
-      // on success
+      this.images.push(imageURI);
     }, (err) => {
       // on fail
     });
@@ -63,9 +63,7 @@ export class BildUebersichtPage {
       quality: 100
     }
 
-    var imagePicker: ImagePicker = new ImagePicker();
-
-    imagePicker.getPictures(options).then((results) => {
+    this.imagePicker.getPictures(options).then((results) => {
       for (var i = 0; i < results.length; i++) {
         this.images.push(results[i]);
       }
