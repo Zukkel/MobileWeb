@@ -20,7 +20,7 @@ export class BildUebersichtPage {
     // create a listener for shake gestures
     shake.startWatch(30).subscribe(() => {
       // open a random image from the current selection
-      this.navCtrl.push(DetailAnsichtPage);
+      this.navCtrl.push(DetailAnsichtPage, {image: this.getRandomPicture(this.images)});
     });
 
     // TODO remove later
@@ -30,6 +30,14 @@ export class BildUebersichtPage {
       "assets/img/testbild.png",
       "assets/img/testbild.png"
     ];
+  }
+
+  /**
+   * Returns a random image from "images"
+   */
+  private getRandomPicture(images: Array<string>): string {
+    var image = this.images[Math.floor(Math.random()*this.images.length)];
+    return image;
   }
 
   /**

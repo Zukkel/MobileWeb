@@ -1,5 +1,5 @@
 import { BildBearbeitenPage } from './../bild-bearbeiten/bild-bearbeiten';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Shake } from '@ionic-native/shake';
@@ -11,18 +11,23 @@ import { Shake } from '@ionic-native/shake';
 })
 export class DetailAnsichtPage {
 
-  constructor(public navCtrl: NavController, private shake: Shake, private socialSharing: SocialSharing) {
+  image: String;
+
+  constructor(public navCtrl: NavController, private navParams: NavParams, private shake: Shake, private socialSharing: SocialSharing) {
     // create a listener for shake gestures
     this.shake.startWatch(30).subscribe(() => {
-      // open a random image from the current selection
+      // TODO access the available images here later
     });
+
+    // get the random image that has been passed
+    this.image = navParams.get("image");
   }
 
   /**
    * Open the edit screen with the currently viewed image
    */
   public openEditScreen(): void {
-    this.navCtrl.push(BildBearbeitenPage, null /* pass image file here */);
+    this.navCtrl.push(BildBearbeitenPage, {image: this.image});
   }
 
   /**

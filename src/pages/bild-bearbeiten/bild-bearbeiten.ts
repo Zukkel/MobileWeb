@@ -1,7 +1,6 @@
 import { DetailAnsichtPage } from './../detail-ansicht/detail-ansicht';
 import { Component } from '@angular/core';
-import { ToastController } from 'ionic-angular';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-bild-bearbeiten',
@@ -11,7 +10,10 @@ export class BildBearbeitenPage {
 
   image: String;
 
-  constructor(public navCtrl: NavController, private toastCtrl: ToastController) {}
+  constructor(public navCtrl: NavController, private navParams: NavParams, private toastCtrl: ToastController) {
+    // get the image that has been passed
+    this.image = navParams.get("image");
+  }
 
   /**
    * Save the changes applied to the image
