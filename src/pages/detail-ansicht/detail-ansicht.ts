@@ -1,5 +1,5 @@
 import { BildBearbeitenPage } from './../bild-bearbeiten/bild-bearbeiten';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, FabContainer  } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Shake } from '@ionic-native/shake';
@@ -28,6 +28,18 @@ export class DetailAnsichtPage {
    */
   public openEditScreen(): void {
     this.navCtrl.push(BildBearbeitenPage, {image: this.image});
+  }
+
+  /**
+   * Close the entire fab list
+   * @param fab the individual fab button
+   */
+  refresh(fab?: FabContainer): void {
+    if (fab !== undefined) {
+      setTimeout(function() { 
+        fab.close();
+      }, 200);
+    }
   }
 
   /**

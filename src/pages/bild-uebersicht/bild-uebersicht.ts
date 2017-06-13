@@ -2,7 +2,7 @@ import { BedienungsanleitungPage } from './../bedienungsanleitung/bedienungsanle
 import { DetailAnsichtPage } from './../detail-ansicht/detail-ansicht';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, FabContainer  } from 'ionic-angular';
 import { Shake } from '@ionic-native/shake';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -38,6 +38,18 @@ export class BildUebersichtPage {
   private getRandomPicture(images: Array<string>): string {
     var image = this.images[Math.floor(Math.random()*this.images.length)];
     return image;
+  }
+
+  /**
+   * Close the entire fab list
+   * @param fab the individual fab button
+   */
+  refresh(fab?: FabContainer): void {
+    if (fab !== undefined) {
+      setTimeout(function() { 
+        fab.close();
+      }, 200);
+    }
   }
 
   /**
