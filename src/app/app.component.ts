@@ -16,7 +16,9 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage = BildUebersichtPage;
-  pages: Array<{title: string, component: any}>;
+
+  pages:   Array<{title: string, component: any}>;
+  folders: Array<{name: string, path: string, filterOn: Boolean}>;
 
   constructor(
     public platform: Platform,
@@ -25,6 +27,15 @@ export class MyApp {
     public splashScreen: SplashScreen
   ) {
     this.initializeApp();
+
+    // TODO remove hardcoded folders later
+    this.folders = [
+      { name: 'Urlaub',  path: "", filterOn: false },
+      { name: 'Zuhause', path: "", filterOn: false },
+      { name: 'Technik', path: "", filterOn: false },
+      { name: 'Natur',   path: "", filterOn: false },
+      { name: 'Lustig',  path: "", filterOn: false }
+    ];
 
     // set our app's pages
     this.pages = [

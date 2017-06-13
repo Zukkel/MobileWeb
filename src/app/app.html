@@ -13,28 +13,11 @@
 
   <ion-content>
     <ion-list>
-      <ion-item>
-        <ion-label>Urlaub</ion-label>
-        <ion-toggle [(ngModel)]="urlaub"></ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-label>Zuhause</ion-label>
-        <ion-toggle [(ngModel)]="zuhause"></ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-label>Technik</ion-label>
-        <ion-toggle [(ngModel)]="technik"></ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-label>Natur</ion-label>
-        <ion-toggle [(ngModel)]="natur"></ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-label>Lustig</ion-label>
-        <ion-toggle [(ngModel)]="lustig"></ion-toggle>
+      <ion-item *ngFor="let folder of folders">
+        <ion-label>{{folder.name}}</ion-label>
+        <ion-toggle [(ngModel)]="folder.filterOn"></ion-toggle>
       </ion-item>
     </ion-list>
-
   </ion-content>
 
 </ion-menu>
