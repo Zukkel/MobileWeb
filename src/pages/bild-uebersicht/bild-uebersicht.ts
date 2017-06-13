@@ -136,6 +136,13 @@ export class BildUebersichtPage {
   }
 
   /**
+   * Import pictures from flickr app
+   */
+  public importFromFlickr(): void {
+    // TODO add cloud import code
+  }
+
+  /**
    * Displays an instruction popup that explains how the app works
    */
   public showInstructions(): void {
