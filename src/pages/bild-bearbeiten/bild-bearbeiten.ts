@@ -26,8 +26,7 @@ export class BildBearbeitenPage {
     let toast = this.toastCtrl.create({
       message: "Bild gespeichert.",
       duration: 2000
-    });
-    toast.present();
+    }); toast.present();
 
     // Go back to the detail page
     this.navCtrl.popTo(DetailAnsichtPage);

@@ -1,5 +1,5 @@
 import { BildBearbeitenPage } from './../bild-bearbeiten/bild-bearbeiten';
-import { NavController, NavParams, FabContainer  } from 'ionic-angular';
+import { NavController, NavParams, FabContainer, ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Shake } from '@ionic-native/shake';
@@ -13,7 +13,7 @@ export class DetailAnsichtPage {
 
   image: String;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private shake: Shake, private socialSharing: SocialSharing) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private shake: Shake, private toastCtrl: ToastController, private socialSharing: SocialSharing) {
     // create a listener for shake gestures
     this.shake.startWatch(30).subscribe(() => {
       // TODO access the available images here later
@@ -21,6 +21,11 @@ export class DetailAnsichtPage {
 
     // get the random image that has been passed
     this.image = navParams.get("image");
+    // Display the images name in a toast to let the user know which one he got exactly
+    let toast = this.toastCtrl.create({
+      message: "Aktuelles Bild: " + this.image.match(/.*\/(.*)$/)[1],
+      duration: 2000
+    }); toast.present();
   }
 
   /**

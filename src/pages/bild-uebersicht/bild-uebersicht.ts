@@ -2,9 +2,11 @@ import { BedienungsanleitungPage } from './../bedienungsanleitung/bedienungsanle
 import { DetailAnsichtPage } from './../detail-ansicht/detail-ansicht';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Component } from '@angular/core';
-import { NavController, ModalController, FabContainer  } from 'ionic-angular';
+import { NavController, ModalController, FabContainer, ToastController } from 'ionic-angular';
 import { Shake } from '@ionic-native/shake';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ISubscription } from "rxjs/Subscription";
+
 
 @Component({
   selector: 'page-bild-uebersicht',
@@ -14,15 +16,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 export class BildUebersichtPage {
 
-  images: Array<string>;	
+  images: Array<string>;
+  watch: ISubscription;
 
-  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera, private modalCtrl: ModalController, private imagePicker: ImagePicker) {
-    // create a listener for shake gestures
-    shake.startWatch(30).subscribe(() => {
-      // open a random image from the current selection
-      this.navCtrl.push(DetailAnsichtPage, {image: this.getRandomPicture(this.images)});
-    });
-
+  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera, private toastCtrl: ToastController, private modalCtrl: ModalController, private imagePicker: ImagePicker) {
     // TODO remove later
     this.images = [
       "assets/img/testbild.png",
@@ -30,6 +27,24 @@ export class BildUebersichtPage {
       "assets/img/testbild.png",
       "assets/img/testbild.png"
     ];
+  }
+
+  /**
+   * Watch for shake gesture to open a random image when the view loads
+   */
+  ionViewDidEnter() {
+    // create a listener for shake gestures
+    this.watch = this.shake.startWatch(30).subscribe(() => {
+      // open a random image from the current selection
+      this.navCtrl.push(DetailAnsichtPage, {image: this.getRandomPicture(this.images)});
+    });
+  }
+
+  /**
+   * Remove the shake listener on view leave
+   */
+  ionViewDidLeave() {
+    this.watch.unsubscribe();
   }
 
   /**
@@ -67,8 +82,17 @@ export class BildUebersichtPage {
 
     this.camera.getPicture(options).then((imageURI) => {
       this.images.push(imageURI);
+      // Display a toast on success
+      let toast = this.toastCtrl.create({
+        message: "Bild erfolgreich importiert.",
+        duration: 2000
+      }); toast.present();
     }, (err) => {
-      // on fail
+      // Display a toast on fail
+      let toast = this.toastCtrl.create({
+        message: "Bild-Import fehlgeschlagen!",
+        duration: 2000
+      }); toast.present();
     });
   }
 
@@ -84,10 +108,22 @@ export class BildUebersichtPage {
     }
 
     this.imagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
+      var i = 0;
+      for (i = 0; i < results.length; i++) {
         this.images.push(results[i]);
       }
-    }, (err) => { });
+      // Display a toast on success
+      let toast = this.toastCtrl.create({
+        message: i + " Bild(er) erfolgreich importiert.",
+        duration: 2000
+      }); toast.present();
+    }, (err) => {
+      // Display a toast on fail
+      let toast = this.toastCtrl.create({
+        message: "Bild-Import fehlgeschlagen!",
+        duration: 2000
+      }); toast.present();
+    });
 	}
 
   /**
