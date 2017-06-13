@@ -112,11 +112,13 @@ export class BildUebersichtPage {
       for (i = 0; i < results.length; i++) {
         this.images.push(results[i]);
       }
-      // Display a toast on success
-      let toast = this.toastCtrl.create({
-        message: i + " Bild(er) erfolgreich importiert.",
-        duration: 2000
-      }); toast.present();
+      if(i > 0) {
+        // Display a toast on success
+        let toast = this.toastCtrl.create({
+          message: i + " Bild(er) erfolgreich importiert.",
+          duration: 2000
+        }); toast.present();
+      }
     }, (err) => {
       // Display a toast on fail
       let toast = this.toastCtrl.create({

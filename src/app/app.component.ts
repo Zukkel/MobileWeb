@@ -18,7 +18,7 @@ export class MyApp {
   rootPage = BildUebersichtPage;
 
   pages:   Array<{title: string, component: any}>;
-  folders: Array<{name: string, path: string, filterOn: Boolean}>;
+  folders: Array<{name: string, path: string, filterOn: boolean}>;
 
   constructor(
     public platform: Platform,
