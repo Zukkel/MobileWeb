@@ -7,6 +7,7 @@ import { Shake } from '@ionic-native/shake';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ISubscription } from "rxjs/Subscription";
 
+declare var Dropbox: any;
 
 @Component({
   selector: 'page-bild-uebersicht',
@@ -132,7 +133,65 @@ export class BildUebersichtPage {
    * Import pictures from cloud service
    */
   public importFromCloud(): void {
-    // TODO add cloud import code
+    // Remember 'this' in order to display toasts in the declared inline functions
+    var _this = this;
+
+    function SuccessCallback() {
+      function checkIfImage(file) {
+        return(file.match(/\.(jpeg|jpg|gif|bmp|png)$/) != null);
+      }
+
+      client.readdir("/", function(error, entries) {
+        if (error) {
+          // Display a toast on fail
+          let toast = _this.toastCtrl.create({
+            message: "Fehler: " + error,
+            duration: 2000
+          }); toast.present();
+        }
+
+        for (var i = 0; i < entries.length; i++) {
+          // Only look for image files and ignore all other ones in the dropbox
+          if(checkIfImage(entries[i])) {
+            // Display a toast for each image found
+            let toast = _this.toastCtrl.create({
+              message: "Datei: " + entries[i],
+              duration: 2000
+            }); toast.present();
+          } 
+        }
+      });
+    }
+
+    var DROPBOX_APP_KEY = 'wjdaz8p7g8ms2kw';
+    const client = new Dropbox.Client({key: DROPBOX_APP_KEY});
+    client.authDriver(new Dropbox.AuthDriver.Cordova());
+
+    // Open the login form of Dropbox and if the user already granted the access only execute the SuccessCallback         
+    client.authenticate({ interactive: true }, function(error) {
+
+      // Handle potential error
+      if (error) {
+          let toast = _this.toastCtrl.create({
+          message: 'Authentifikationsfehler: ' + error,
+          duration: 2000
+        }); toast.present();
+        return;
+      }
+      
+      if(client.isAuthenticated()) {
+        let toast = _this.toastCtrl.create({
+          message: "Verbindung zu Dropbox erfolgreich.",
+          duration: 2000
+        }); toast.present();
+        SuccessCallback();
+      } else {
+        let toast = _this.toastCtrl.create({
+          message: "Dropbox-Authentifikation fehlgeschlagen.\nVersuchen Sie es erneut!",
+          duration: 2000
+        }); toast.present();
+      }
+    });
   }
 
   /**

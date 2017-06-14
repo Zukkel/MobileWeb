@@ -10,6 +10,7 @@ import { BildBearbeitenPage } from './../pages/bild-bearbeiten/bild-bearbeiten';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DropboxProvider } from '../providers/dropbox/dropbox';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DropboxProvider
   ]
 })
 export class AppModule {
