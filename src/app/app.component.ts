@@ -3,7 +3,7 @@ import { BildBearbeitenPage } from './../pages/bild-bearbeiten/bild-bearbeiten';
 import { BildUebersichtPage } from '../pages/bild-uebersicht/bild-uebersicht';
 
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, ToastController  } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController, Keyboard } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,8 +20,12 @@ export class MyApp {
   pages:   Array<{title: string, component: any}>;
   folders: Array<{name: string, path: string, filterOn: boolean}>;
 
+  // This variable defines whether or not to display images without any category at all
+  noCategoryFilterOn: boolean = false;
+
   constructor(
     public platform: Platform,
+    public keyboard: Keyboard,
     public menu: MenuController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
@@ -31,11 +35,10 @@ export class MyApp {
 
     // TODO remove hardcoded folders later
     this.folders = [
-      { name: 'Urlaub',  path: "", filterOn: false },
-      { name: 'Zuhause', path: "", filterOn: false },
-      { name: 'Technik', path: "", filterOn: false },
-      { name: 'Natur',   path: "", filterOn: false },
-      { name: 'Lustig',  path: "", filterOn: false }
+      { name: 'Urlaub',  path: "/" + name, filterOn: false },
+      { name: 'Zuhause', path: "/" + name, filterOn: false },
+      { name: 'Technik', path: "/" + name, filterOn: false },
+      { name: 'Natur',   path: "/" + name, filterOn: false }
     ];
 
     // set our app's pages
@@ -62,32 +65,47 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  hideKeyboard(event) {
+    // Hide the keyboard (for example after a text has been submitted)
+    event.preventDefault();
+    this.keyboard.close();
+  }
+
   /**
    * Create a new folder to act as a new image category
    */
   public createFolder(): void {
-
+    if(this.folders.length <= 15) {
+      // Create a nameless folder so the user can rename it himself
+      this.folders.push({ name: null,  path: "/" + name, filterOn: false });
+    } else {
+      // Tell the user that he cannot create more than 20 folders
+      let toast = this.toastCtrl.create({
+        message: "Maximalanzahl von 15 Ordnern erreicht!",
+        duration: 2000
+      }); toast.present();
+    }
   }
 
   /**
-   * Delete the selected folder
-   * @param index The selected folder
+   * Delete the selected folder by index
+   * @param index The selected folders index
    */
-  public deleteFolder(index: string): void {
-    let toast = this.toastCtrl.create({
-      message: "Ordner \"" + index + "\" gelöscht.",
-      duration: 2000
-    }); toast.present();
-  }
-
-  /**
-   * Rename the selected folder
-   * @param index The selected folder
-   */
-  public renameFolder(index: string): void {
-    let toast = this.toastCtrl.create({
-      message: "Ordner \"" + index + "\" in \"" + index + "\" umbenannt.",
-      duration: 2000
-    }); toast.present();
+  public deleteFolder(index: number): void {
+    if (index > -1 && index <= this.folders.length) {
+      var folderName = this.folders[index].name;
+      this.folders.splice(index, 1);
+      // Display a toast on success
+      let toast = this.toastCtrl.create({
+        message: "Ordner \"" + folderName + "\" gelöscht.",
+        duration: 2000
+      }); toast.present();
+    } else {
+      // Display a toast on fail
+      let toast = this.toastCtrl.create({
+        message: "Löschen des Ordners fehlgeschlagen!",
+        duration: 2000
+      }); toast.present();
+    }
   }
 }

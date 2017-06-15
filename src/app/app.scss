@@ -20,34 +20,18 @@
         margin-bottom: 8px;
     }
 
-    ion-label {
-        padding-left: 6px;
-    }
-
-    .label {
-        margin: 2px;
-    }
-
-    .no-padding {
-        padding: 0px !important;
-    }
-
-    .text {
-        margin-left:    16px;
-        margin-top:     8px;
-        padding-left:   8px;
-        padding-right:  8px;
-        line-height:    36px;
-        display:        inline-block;
-        vertical-align: middle;
-    }
-
     .list-button {
         color: #222;
+        margin-right: 0px !important;
+        z-index: 1;
     }
 
     scroll-content {
         overflow-y: auto;
+    }
+
+    ion-toggle {
+        z-index: 1;
     }
     
     .bar-button-md {

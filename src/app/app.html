@@ -11,16 +11,21 @@
     </ion-navbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content (keydown.enter)="hideKeyboard($event)">
     <ion-list>
-      <ion-item no-padding *ngFor="let folder of folders">
-        <ion-label>
-          <button round class ="list-button" ion-button icon-only clear (click)="deleteFolder(folder.name)">
-            <ion-icon name="trash"></ion-icon>
-          </button>
-        </ion-label>
-        <ion-input placeholder="Ordnernamen eintragen" [value]="folder.name"></ion-input>
-        <ion-toggle [(ngModel)]="folder.filterOn"></ion-toggle>
+      <ion-item>
+        <ion-toggle item-left [(ngModel)]="noCategoryFilterOn"></ion-toggle>
+        <ion-input disabled value="Ohne Kategorie"></ion-input>
+        <button disabled class="list-button" ion-button round default icon-only clear item-right>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item *ngFor="let folder of folders; let i = index">
+        <ion-toggle item-left [(ngModel)]="folder.filterOn"></ion-toggle>
+        <ion-input placeholder="Bezeichnung eintragen" [value]="folder.name"></ion-input>
+        <button class ="list-button" ion-button round default icon-only clear item-right (click)="deleteFolder(i)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>
