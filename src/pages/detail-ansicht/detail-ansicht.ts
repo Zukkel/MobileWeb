@@ -13,7 +13,13 @@ export class DetailAnsichtPage {
 
   image: String;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private shake: Shake, private toastCtrl: ToastController, private socialSharing: SocialSharing) {
+  constructor(
+    public navCtrl: NavController,
+    private navParams: NavParams,
+    private shake: Shake,
+    private toastCtrl: ToastController,
+    private socialSharing: SocialSharing
+  ) {
     // create a listener for shake gestures
     this.shake.startWatch(30).subscribe(() => {
       // TODO access the available images here later

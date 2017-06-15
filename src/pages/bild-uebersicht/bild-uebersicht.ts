@@ -20,7 +20,14 @@ export class BildUebersichtPage {
   images: Array<string>;
   watch: ISubscription;
 
-  constructor(public navCtrl: NavController, private shake: Shake, private camera: Camera, private toastCtrl: ToastController, private modalCtrl: ModalController, private imagePicker: ImagePicker) {
+  constructor(
+    public navCtrl: NavController,
+    private shake: Shake,
+    private camera: Camera,
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
+    private imagePicker: ImagePicker
+  ) {
     // TODO remove later
     this.images = [
       "assets/img/testbild.png",

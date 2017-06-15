@@ -10,7 +10,11 @@ export class BildBearbeitenPage {
 
   image: String;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private toastCtrl: ToastController) {
+  constructor(
+    public navCtrl: NavController,
+    private navParams: NavParams,
+    private toastCtrl: ToastController
+  ) {
     // get the image that has been passed
     this.image = navParams.get("image");
   }

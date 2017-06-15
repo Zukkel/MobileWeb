@@ -3,7 +3,7 @@ import { BildBearbeitenPage } from './../pages/bild-bearbeiten/bild-bearbeiten';
 import { BildUebersichtPage } from '../pages/bild-uebersicht/bild-uebersicht';
 
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController  } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +24,8 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    private toastCtrl: ToastController
   ) {
     this.initializeApp();
 
@@ -66,5 +67,27 @@ export class MyApp {
    */
   public createFolder(): void {
 
+  }
+
+  /**
+   * Delete the selected folder
+   * @param index The selected folder
+   */
+  public deleteFolder(index: string): void {
+    let toast = this.toastCtrl.create({
+      message: "Ordner \"" + index + "\" gelöscht.",
+      duration: 2000
+    }); toast.present();
+  }
+
+  /**
+   * Rename the selected folder
+   * @param index The selected folder
+   */
+  public renameFolder(index: string): void {
+    let toast = this.toastCtrl.create({
+      message: "Ordner \"" + index + "\" in \"" + index + "\" umbenannt.",
+      duration: 2000
+    }); toast.present();
   }
 }

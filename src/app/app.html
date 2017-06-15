@@ -13,8 +13,13 @@
 
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let folder of folders">
-        <ion-label>{{folder.name}}</ion-label>
+      <ion-item no-padding *ngFor="let folder of folders">
+        <ion-label>
+          <button round class ="list-button" ion-button icon-only clear (click)="deleteFolder(folder.name)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-label>
+        <ion-input placeholder="Ordnernamen eintragen" [value]="folder.name"></ion-input>
         <ion-toggle [(ngModel)]="folder.filterOn"></ion-toggle>
       </ion-item>
     </ion-list>
