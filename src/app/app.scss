@@ -20,6 +20,11 @@
         margin-bottom: 8px;
     }
 
+    .item-inner, .item {
+        border-bottom-color: lightgray !important;
+        box-shadow: none !important;
+    }
+    
     .list-button {
         color: #222;
         margin-right: 0px !important;

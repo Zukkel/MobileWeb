@@ -22,7 +22,7 @@
       </ion-item>
       <ion-item *ngFor="let folder of folders; let i = index">
         <ion-toggle item-left [(ngModel)]="folder.filterOn"></ion-toggle>
-        <ion-input placeholder="Bezeichnung eintragen" [value]="folder.name"></ion-input>
+        <ion-input placeholder="Bezeichnung eintragen" [value]="folder.name" [(ngModel)]="folder.name"></ion-input>
         <button class ="list-button" ion-button round default icon-only clear item-right (click)="deleteFolder(i)">
           <ion-icon name="trash"></ion-icon>
         </button>
