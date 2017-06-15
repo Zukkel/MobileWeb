@@ -3,7 +3,7 @@ import { BildBearbeitenPage } from './../pages/bild-bearbeiten/bild-bearbeiten';
 import { BildUebersichtPage } from '../pages/bild-uebersicht/bild-uebersicht';
 
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, ToastController, Keyboard } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController, Keyboard, AlertController } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +25,7 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
+    private alertCtrl: AlertController,
     public keyboard: Keyboard,
     public menu: MenuController,
     public statusBar: StatusBar,
@@ -72,6 +73,35 @@ export class MyApp {
   }
 
   /**
+   * Displays a alert to ask to user to really delete a folder
+   * @param index The selected folders index
+   */
+  private showDeleteFolderAlert(index: number): void {
+    // Remember the name of the folder
+    var folderName = this.folders[index].name;
+
+    let alert = this.alertCtrl.create({
+      title: "Kategorie löschen",
+      subTitle: "Den Ordner \"" + folderName + "\" wirklich löschen?",
+      buttons: [{
+        text: "Abbrechen",
+        role: "cancel"
+      }, {
+        text: "Löschen",
+        handler: () => {
+          this.folders.splice(index, 1);
+          // Display a toast on success
+          let toast = this.toastCtrl.create({
+            message: "Ordner \"" + folderName + "\" gelöscht.",
+            duration: 2000
+          }); toast.present();
+        }
+      }]
+    });
+    alert.present();
+  }
+
+  /**
    * Create a new folder to act as a new image category
    */
   public createFolder(): void {
@@ -93,13 +123,8 @@ export class MyApp {
    */
   public deleteFolder(index: number): void {
     if (index > -1 && index <= this.folders.length) {
-      var folderName = this.folders[index].name;
-      this.folders.splice(index, 1);
-      // Display a toast on success
-      let toast = this.toastCtrl.create({
-        message: "Ordner \"" + folderName + "\" gelöscht.",
-        duration: 2000
-      }); toast.present();
+      // Ask the user if he really wants to delete the folder
+      this.showDeleteFolderAlert(index);
     } else {
       // Display a toast on fail
       let toast = this.toastCtrl.create({
