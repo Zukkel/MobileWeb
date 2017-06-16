@@ -24,7 +24,9 @@
       <div class="content">
         <div class="table">
           <div class="table-cell">
-            <ion-checkbox [(ngModel)]="image.checked"></ion-checkbox>
+            <label for="i"></label>
+            <input style="display:none" type="checkbox" id="i" [(ngModel)]="image.checked"/>
+            <div class="circle"><ion-icon style="color:white" name="checkmark"></ion-icon></div>
           </div>
         </div>
       </div>
