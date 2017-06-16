@@ -7,7 +7,7 @@
         </button>
     </ion-buttons>
     <ion-buttons end>
-        <button ion-button icon-only (click)="toggleCategoryBar()">
+        <button ion-button icon-only (click)="chooseFolder()">
           <ion-icon name="folder"></ion-icon>
         </button>
     </ion-buttons>
@@ -17,18 +17,6 @@
         </button>
     </ion-buttons>
   </ion-navbar>
-
-  <ion-item id="categoryBar">
-    <ion-label>Kategorie</ion-label>
-    <ion-select multiple="false" okText="OK" cancelText="Abbrechen">
-      <ion-option>Urlaub</ion-option>
-      <ion-option>Zuhause</ion-option>
-      <ion-option>Technik</ion-option>
-      <ion-option>Natur</ion-option>
-      <ion-option>Lustig</ion-option>
-    </ion-select>
-  </ion-item>
-
 </ion-header>
 
 <ion-content>

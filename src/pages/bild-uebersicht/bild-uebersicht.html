@@ -4,6 +4,11 @@
       <ion-icon name='menu'></ion-icon>
     </button>
     <ion-title>Shake-A-Gram</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="chooseFolder()">
+          <ion-icon name="folder"></ion-icon>
+        </button>
+    </ion-buttons>
     <ion-buttons right>
         <button ion-button icon-only (click)="showInstructions()">
           <ion-icon name="information-circle"></ion-icon>
@@ -14,8 +19,15 @@
 
 <ion-content>
 
-  <div class="square-grid" *ngFor="let file_uri of images">
-    <div class="square" [style.background-image]="'url('+file_uri+')'">
+  <div class="square-grid" *ngFor="let image of images; let i = index">
+    <div class="square" [style.background-image]="'url('+image.url+')'" (click)="toggleImageChecked(i)">
+      <div class="content">
+        <div class="table">
+          <div class="table-cell">
+            <ion-checkbox [(ngModel)]="image.checked"></ion-checkbox>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

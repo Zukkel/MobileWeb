@@ -13,6 +13,7 @@ import { Shake } from '@ionic-native/shake';
 export class DetailAnsichtPage {
 
   image: String;
+  folders: Array<{name: string, path: string, filterOn: boolean}>;
 
   constructor(
     public navCtrl: NavController,
@@ -26,6 +27,14 @@ export class DetailAnsichtPage {
     this.shake.startWatch(30).subscribe(() => {
       // TODO access the available images here later
     });
+
+     // TODO remove hardcoded folders later
+    this.folders = [
+      { name: 'Urlaub',  path: "/" + name, filterOn: false },
+      { name: 'Zuhause', path: "/" + name, filterOn: false },
+      { name: 'Technik', path: "/" + name, filterOn: false },
+      { name: 'Natur',   path: "/" + name, filterOn: false }
+    ];
 
     // get the random image that has been passed
     this.image = navParams.get("image");
@@ -56,11 +65,34 @@ export class DetailAnsichtPage {
   }
 
   /**
-   * Shows the category bar only if needed
+   * Displays a selection dialog with all current category folders
    */
-  public toggleCategoryBar(): void {
-    var bar = document.getElementById("categoryBar");
-    bar.classList.toggle("animate");
+  public chooseFolder(): void {
+    let alert = this.alertCtrl.create({
+      title: "Kategorie wählen",
+      buttons: [{
+        text: "Abbrechen",
+        role: "cancel"
+      }, {
+        text: "Ändern",
+        handler: () => {
+          // TODO set category of the current image here later
+
+          // Display a toast on success
+          let toast = this.toastCtrl.create({
+            message: "Bildkategorie erfolgreich geändert.",
+            duration: 2000
+          }); toast.present();
+        }
+      }]
+    });
+    // Add all possible category options
+    alert.addInput({type: 'radio', label: "Ohne Kategorie", value: "Ohne Kategorie", checked: true});
+    // TODO read the currently selected category and set the 'checked' state accordingly
+    for(var i = 0; i < this.folders.length; i++) {
+      alert.addInput({type: 'radio', label: this.folders[i].name, value: this.folders[i].name});
+    }
+    alert.present();
   }
 
   /**
