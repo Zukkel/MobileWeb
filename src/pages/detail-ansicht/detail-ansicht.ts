@@ -1,5 +1,6 @@
+import { BildUebersichtPage } from './../bild-uebersicht/bild-uebersicht';
 import { BildBearbeitenPage } from './../bild-bearbeiten/bild-bearbeiten';
-import { NavController, NavParams, FabContainer, ToastController } from 'ionic-angular';
+import { NavController, NavParams, FabContainer, ToastController, AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Shake } from '@ionic-native/shake';
@@ -16,6 +17,7 @@ export class DetailAnsichtPage {
   constructor(
     public navCtrl: NavController,
     private navParams: NavParams,
+    private alertCtrl: AlertController,
     private shake: Shake,
     private toastCtrl: ToastController,
     private socialSharing: SocialSharing
@@ -65,7 +67,30 @@ export class DetailAnsichtPage {
    * Delete the currently displayed image and go back to the main screen
    */
   public deleteImage(): void {
-    // TODO add code
+    let alert = this.alertCtrl.create({
+      title: "Bild löschen",
+      subTitle: "Das aktuelle Bild wirklich löschen?",
+      buttons: [{
+        text: "Abbrechen",
+        role: "cancel"
+      }, {
+        text: "Löschen",
+        handler: () => {
+          
+          // TODO delete image here later
+
+          // Display a toast on success
+          let toast = this.toastCtrl.create({
+            message: "Bild gelöscht.",
+            duration: 2000
+          }); toast.present();
+
+          // Go back to the homescreen
+          this.navCtrl.popTo(BildUebersichtPage);
+        }
+      }]
+    });
+    alert.present();
   }
 
   // https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin

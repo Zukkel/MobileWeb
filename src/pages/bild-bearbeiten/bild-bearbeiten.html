@@ -1,8 +1,10 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='arrow-back'></ion-icon>
-    </button>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only style="margin-left: 8px !important" (click)="confirmBackWithoutSaving()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+  	</ion-buttons>
     <ion-title>Bild bearbeiten</ion-title>
     <ion-buttons right>
         <button ion-button icon-only (click)="saveImage()">
