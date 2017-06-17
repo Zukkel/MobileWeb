@@ -40,12 +40,7 @@ export class BildUebersichtPage {
     ];
 
     // TODO remove later
-    this.images = [
-      { url: "assets/img/testbild.png", checked: false },
-      { url: "assets/img/testbild.png", checked: false },
-      { url: "assets/img/testbild.png", checked: false },
-      { url: "assets/img/testbild.png", checked: false }
-    ];
+    this.images = [];
   }
 
   /**

@@ -134,7 +134,7 @@ export class DetailAnsichtPage {
    * Share current image via email
    */ 
   public shareWithEmail(): void {
-    this.socialSharing.shareViaEmail(this.shareMessage, this.shareTitle, null, null, null, "www/" + this.image).then(() => {
+    this.socialSharing.shareViaEmail(this.shareMessage, this.shareTitle, null, null, null, this.image).then(() => {
     }).catch(() => {
       this.makeToast("Teilen durch E-Mail fehlgeschlagen!");
     });
@@ -144,7 +144,7 @@ export class DetailAnsichtPage {
    * Share current image to facebook
    */
   public shareToFacebook(): void {
-    this.socialSharing.shareViaFacebook(this.shareMessage, "www/" + this.image, null).then(() => {
+    this.socialSharing.shareViaFacebook(this.shareMessage, this.image, null).then(() => {
     }).catch(() => {
       this.makeToast("In Facebook teilen fehlgeschlagen!");
     });
@@ -154,7 +154,7 @@ export class DetailAnsichtPage {
    * Share current image to twitter
    */
   public shareToTwitter(): void {
-    this.socialSharing.shareViaTwitter(this.shareMessage, "www/" + this.image, null).then(() => {
+    this.socialSharing.shareViaTwitter(this.shareMessage, this.image, null).then(() => {
     }).catch(() => {
       this.makeToast("Auf Twitter teilen fehlgeschlagen!");
     });
@@ -164,7 +164,7 @@ export class DetailAnsichtPage {
    * Share current image to whatsapp
    */
   public shareToWhatsapp(): void {
-    this.socialSharing.shareViaWhatsApp(this.shareMessage, "www/" + this.image, null).then(() => {
+    this.socialSharing.shareViaWhatsApp(this.shareMessage, this.image, null).then(() => {
     }).catch(() => {
       this.makeToast("In Whatsapp teilen fehlgeschlagen!");
     });
