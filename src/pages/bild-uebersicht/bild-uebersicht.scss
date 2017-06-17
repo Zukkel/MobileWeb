@@ -41,6 +41,10 @@ page-bild-uebersicht {
          visibility: visible;
     }
 
+    #folderButton {
+        display: none;
+    }
+
     .circle {
         display:          inline-block;
         visibility:       hidden;

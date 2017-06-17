@@ -19,7 +19,6 @@ export class BildUebersichtPage {
 
   images: Array<{url: string, checked: boolean}>;
   watch: ISubscription;
-
   folders: Array<{name: string, path: string, filterOn: boolean}>;
 
   constructor(
@@ -72,6 +71,31 @@ export class BildUebersichtPage {
    */
   public toggleImageChecked(index: number): void {
     this.images[index].checked = !this.images[index].checked;
+    var showFolderButton = false;
+
+    // Keep the folder button active if at least one image is selected
+    for(var i = 0; i < this.images.length; i++) {
+      if(this.images[i].checked == true) {
+        showFolderButton = true;
+        break;
+      }
+    }
+
+    // Apply the css if at least one image is selected
+    this.showFolderButton(showFolderButton);
+  }
+
+  /**
+   * Shows or hides the folder button in the navigation bar
+   * @param showFolderButton boolean display state of the button
+   */
+  private showFolderButton(showFolderButton): void {
+    var displayFolderButton = document.getElementById("folderButton");
+    if(showFolderButton == true) {
+      displayFolderButton.style.display = "block";
+    } else {
+      displayFolderButton.style.display = "none";
+    }
   }
 
   /**
@@ -112,6 +136,9 @@ export class BildUebersichtPage {
           this.images.forEach(function(image) {
             image.checked = false
           });
+
+          // Hide the folder button
+          this.showFolderButton(false);
 
           // Display a toast on success
           let toast = this.toastCtrl.create({
