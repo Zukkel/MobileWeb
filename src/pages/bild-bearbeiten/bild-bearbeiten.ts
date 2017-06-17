@@ -8,7 +8,7 @@ import { NavController, NavParams, ToastController, AlertController, Platform } 
 })
 export class BildBearbeitenPage {
 
-  image: String = null;
+  image: string = null;
   edited: boolean = false;
 
   constructor(
@@ -53,6 +53,17 @@ export class BildBearbeitenPage {
   }
 
   /**
+   * Display a toast message
+   * @param text The text of the message
+   */
+  private makeToast(text): void {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000
+    }); toast.present();
+  }
+
+  /**
    * Save the changes applied to the image
    */
   public saveImage(): void {
@@ -69,10 +80,7 @@ export class BildBearbeitenPage {
           // TODO save image here later
 
           // Display a toast on success
-          let toast = this.toastCtrl.create({
-            message: "Änderungen gespeichert.",
-            duration: 2000
-          }); toast.present();
+          this.makeToast("Änderungen gespeichert.");
 
           // Go back to the detail page
           this.navCtrl.popTo(DetailAnsichtPage);

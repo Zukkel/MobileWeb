@@ -12,8 +12,11 @@ import { Shake } from '@ionic-native/shake';
 })
 export class DetailAnsichtPage {
 
-  image: String;
+  image: string = null;
   folders: Array<{name: string, path: string, filterOn: boolean}>;
+
+  shareTitle: string = "Bild aus Shake-A-Gram";
+  shareMessage: string = "Schau dir dieses Bild an, welches ich mit der Shake-A-Gram App erschüttelt habe!";
 
   constructor(
     public navCtrl: NavController,
@@ -39,10 +42,7 @@ export class DetailAnsichtPage {
     // get the random image that has been passed
     this.image = navParams.get("image");
     // Display the images name in a toast to let the user know which one he got exactly
-    let toast = this.toastCtrl.create({
-      message: "Aktuelles Bild: " + this.image.match(/.*\/(.*)$/)[1],
-      duration: 2000
-    }); toast.present();
+    this.makeToast("Aktuelles Bild: " + this.image.match(/.*\/(.*)$/)[1]);
   }
 
   /**
@@ -79,10 +79,7 @@ export class DetailAnsichtPage {
           // TODO set category of the current image here later
 
           // Display a toast on success
-          let toast = this.toastCtrl.create({
-            message: "Bildkategorie erfolgreich geändert.",
-            duration: 2000
-          }); toast.present();
+          this.makeToast("Bildkategorie erfolgreich geändert.");
         }
       }]
     });
@@ -112,10 +109,7 @@ export class DetailAnsichtPage {
           // TODO delete image here later
 
           // Display a toast on success
-          let toast = this.toastCtrl.create({
-            message: "Bild gelöscht.",
-            duration: 2000
-          }); toast.present();
+          this.makeToast("Bild gelöscht.");
 
           // Go back to the homescreen
           this.navCtrl.popTo(BildUebersichtPage);
@@ -125,49 +119,54 @@ export class DetailAnsichtPage {
     alert.present();
   }
 
-  // https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin
+  /**
+   * Display a toast message
+   * @param text The text of the message
+   */
+  private makeToast(text): void {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000
+    }); toast.present();
+  }
 
   /**
-   * Share via email
+   * Share current image via email
    */ 
   public shareWithEmail(): void {
-    this.socialSharing.shareViaEmail("Nachricht", "Betreff", ["Empfänger"], null, null, null /* bilder */).then(() => {
-    // Success!
+    this.socialSharing.shareViaEmail(this.shareMessage, this.shareTitle, null, null, null, "www/" + this.image).then(() => {
     }).catch(() => {
-    // Error!
+      this.makeToast("Teilen durch E-Mail fehlgeschlagen!");
     });
   }
 
   /**
-   * Share to facebook
+   * Share current image to facebook
    */
   public shareToFacebook(): void {
-    this.socialSharing.shareViaFacebook("Message", null /* image */, null /* link */).then(() => {
-    // Success!
+    this.socialSharing.shareViaFacebook(this.shareMessage, "www/" + this.image, null).then(() => {
     }).catch(() => {
-    // Error!
+      this.makeToast("In Facebook teilen fehlgeschlagen!");
     });
 	}
 
   /**
-   * Share to twitter
+   * Share current image to twitter
    */
   public shareToTwitter(): void {
-    this.socialSharing.shareViaTwitter("Message", null /* image */, null /* link */).then(() => {
-    // Success!
+    this.socialSharing.shareViaTwitter(this.shareMessage, "www/" + this.image, null).then(() => {
     }).catch(() => {
-    // Error!
+      this.makeToast("Auf Twitter teilen fehlgeschlagen!");
     });
 	}
 
   /**
-   * Share to whatsapp
+   * Share current image to whatsapp
    */
   public shareToWhatsapp(): void {
-    this.socialSharing.shareViaWhatsApp("Message", null /* image */, null /* link */).then(() => {
-    // Success!
+    this.socialSharing.shareViaWhatsApp(this.shareMessage, "www/" + this.image, null).then(() => {
     }).catch(() => {
-    // Error!
+      this.makeToast("In Whatsapp teilen fehlgeschlagen!");
     });
 	}
 }

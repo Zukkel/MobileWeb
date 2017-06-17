@@ -67,6 +67,17 @@ export class BildUebersichtPage {
   }
 
   /**
+   * Display a toast message
+   * @param text The text of the message
+   */
+  private makeToast(text): void {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000
+    }); toast.present();
+  }
+
+  /**
    * Toggles the checkmark on image containers
    */
   public toggleImageChecked(index: number): void {
@@ -141,10 +152,7 @@ export class BildUebersichtPage {
           this.showFolderButton(false);
 
           // Display a toast on success
-          let toast = this.toastCtrl.create({
-            message: "Kategorie der ausgewählten Bilder geändert.",
-            duration: 2000
-          }); toast.present();
+          this.makeToast("Kategorie der ausgewählten Bilder geändert.");
         }
       }]
     });
@@ -174,16 +182,10 @@ export class BildUebersichtPage {
     this.camera.getPicture(options).then((imageURI) => {
       this.images.push({ url: imageURI, checked: false});
       // Display a toast on success
-      let toast = this.toastCtrl.create({
-        message: "Bild erfolgreich importiert.",
-        duration: 2000
-      }); toast.present();
+      this.makeToast("Bild erfolgreich importiert.");
     }, (err) => {
       // Display a toast on fail
-      let toast = this.toastCtrl.create({
-        message: "Bild-Import fehlgeschlagen!",
-        duration: 2000
-      }); toast.present();
+      this.makeToast("Bild-Import fehlgeschlagen!");
     });
   }
 
@@ -205,17 +207,11 @@ export class BildUebersichtPage {
       }
       if(i > 0) {
         // Display a toast on success
-        let toast = this.toastCtrl.create({
-          message: i + " Bild(er) erfolgreich importiert.",
-          duration: 2000
-        }); toast.present();
+        this.makeToast(i + " Bild(er) erfolgreich importiert.");
       }
     }, (err) => {
       // Display a toast on fail
-      let toast = this.toastCtrl.create({
-        message: "Bild-Import fehlgeschlagen!",
-        duration: 2000
-      }); toast.present();
+      this.makeToast("Bild-Import fehlgeschlagen!");
     });
 	}
 
@@ -234,20 +230,14 @@ export class BildUebersichtPage {
       client.readdir("/", function(error, entries) {
         if (error) {
           // Display a toast on fail
-          let toast = _this.toastCtrl.create({
-            message: "Fehler: " + error,
-            duration: 2000
-          }); toast.present();
+          _this.makeToast("Fehler: " + error);
         }
 
         for (var i = 0; i < entries.length; i++) {
           // Only look for image files and ignore all other ones in the dropbox
           if(checkIfImage(entries[i])) {
             // Display a toast for each image found
-            let toast = _this.toastCtrl.create({
-              message: "Datei: " + entries[i],
-              duration: 2000
-            }); toast.present();
+            _this.makeToast("Datei: " + entries[i]);
           } 
         }
       });
@@ -262,24 +252,15 @@ export class BildUebersichtPage {
 
       // Handle potential error
       if (error) {
-          let toast = _this.toastCtrl.create({
-          message: 'Authentifikationsfehler: ' + error,
-          duration: 2000
-        }); toast.present();
+        _this.makeToast("Authentifikationsfehler: " + error);
         return;
       }
       
       if(client.isAuthenticated()) {
-        let toast = _this.toastCtrl.create({
-          message: "Verbindung zu Dropbox erfolgreich.",
-          duration: 2000
-        }); toast.present();
+        _this.makeToast("Verbindung zu Dropbox erfolgreich.");
         SuccessCallback();
       } else {
-        let toast = _this.toastCtrl.create({
-          message: "Dropbox-Authentifikation fehlgeschlagen.\nVersuchen Sie es erneut!",
-          duration: 2000
-        }); toast.present();
+        _this.makeToast("Dropbox-Authentifikation fehlgeschlagen.\nVersuchen Sie es erneut!");
       }
     });
   }
@@ -289,6 +270,7 @@ export class BildUebersichtPage {
    */
   public importFromFlickr(): void {
     // TODO add cloud import code
+    this.makeToast("Diese Option ist noch nicht vorhanden.");
   }
 
   /**

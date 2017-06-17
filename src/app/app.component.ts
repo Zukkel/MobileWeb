@@ -73,6 +73,17 @@ export class MyApp {
     this.keyboard.close();
   }
 
+    /**
+   * Display a toast message
+   * @param text The text of the message
+   */
+  private makeToast(text): void {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000
+    }); toast.present();
+  }
+
   /**
    * Displays a alert to ask to user to really delete a folder
    * @param index The selected folders index
@@ -92,10 +103,7 @@ export class MyApp {
         handler: () => {
           this.folders.splice(index, 1);
           // Display a toast on success
-          let toast = this.toastCtrl.create({
-            message: "Ordner \"" + folderName + "\" gelöscht.",
-            duration: 2000
-          }); toast.present();
+          this.makeToast("Ordner \"" + folderName + "\" gelöscht.");
         }
       }]
     });
@@ -110,11 +118,8 @@ export class MyApp {
       // Create a nameless folder so the user can rename it himself
       this.folders.push({ name: null,  path: "/" + name, filterOn: false });
     } else {
-      // Tell the user that he cannot create more than 20 folders
-      let toast = this.toastCtrl.create({
-        message: "Maximalanzahl von 15 Ordnern erreicht!",
-        duration: 2000
-      }); toast.present();
+      // Tell the user that he cannot create more than 15 folders
+      this.makeToast("Maximalanzahl von 15 Ordnern erreicht!");
     }
   }
 
@@ -128,10 +133,7 @@ export class MyApp {
       this.showDeleteFolderAlert(index);
     } else {
       // Display a toast on fail
-      let toast = this.toastCtrl.create({
-        message: "Löschen des Ordners fehlgeschlagen!",
-        duration: 2000
-      }); toast.present();
+      this.makeToast("Löschen des Ordners fehlgeschlagen!");
     }
   }
 }
