@@ -108,6 +108,11 @@ export class BildUebersichtPage {
         handler: () => {
           // TODO set categories of all selected images to the chosen one
 
+          // Aufheben der aktuellen Auswahl
+          this.images.forEach(function(image) {
+            image.checked = false
+          });
+
           // Display a toast on success
           let toast = this.toastCtrl.create({
             message: "Kategorie der ausgewählten Bilder geändert.",
