@@ -11,7 +11,7 @@
     </ion-navbar>
   </ion-header>
 
-  <ion-content (keydown.enter)="hideKeyboard($event)">
+  <ion-content fullscreen="true" (keydown.enter)="hideKeyboard($event)">
     <ion-list>
       <ion-item>
         <ion-toggle color="secondary" item-left [(ngModel)]="noCategoryFilterOn"></ion-toggle>

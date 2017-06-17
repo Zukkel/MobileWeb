@@ -19,7 +19,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
 
   <div class="square-grid" *ngFor="let image of images; let i = index">
     <div class="square" [style.background-image]="'url('+image.url+')'" (click)="toggleImageChecked(i)">
